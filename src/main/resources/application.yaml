@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/webxaydung?useSSL=false&serverTimezone=UTC
-    username: root
-    password:
+    url: jdbc:mysql://rain.db.elephantsql.com:3306/jjqdjrun
+    username: jjqdjrun
+    password: MkFVikc7ESgFY60R0VsFnsWcVnLfyWYD
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
