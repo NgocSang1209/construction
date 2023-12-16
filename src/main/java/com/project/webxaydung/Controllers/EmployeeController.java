@@ -46,7 +46,7 @@ public class EmployeeController {
             @PathVariable("id") int id
     ) {
         employeeService.getEmployeeById(id);
-        return ResponseEntity.ok("Employee with ID: " + employeeService.getEmployeeById(id));
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEmployee(

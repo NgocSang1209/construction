@@ -41,8 +41,8 @@ public class ContactService {
 
     public List<Contact> getContactsByDate(Date date) {
         // Chuyển đổi Date thành LocalDateTime
-        LocalDateTime startOfDay = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-        LocalDateTime endOfDay = startOfDay.plusDays(1); // Thêm 1 ngày
+        LocalDateTime endOfDay = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        LocalDateTime startOfDay= endOfDay.minusDays(1); // giảm 1 ngày
 
         return contactRepository.findBySubDateBetween(startOfDay, endOfDay);
     }

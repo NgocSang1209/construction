@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("${api.prefix}/subemail")
+@RequestMapping("${api.prefix}/sub_email")
 @RequiredArgsConstructor
 @Validated
 public class SubEmailController {
@@ -28,15 +28,25 @@ public class SubEmailController {
 
     @PostMapping("")
     public ResponseEntity<?> createSubEmail(@Valid @RequestBody SubEmailDTO subEmailDTO, BindingResult result){
-        if(result.hasErrors()) {
-            List<String> errorMessages = result.getFieldErrors()
-                    .stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-            return ResponseEntity.badRequest().body(errorMessages);
-        }
-        subEmailService.createSubEmail(subEmailDTO);
-        return ResponseEntity.ok("Insert SubEmail Successfully");
-    }
+      try {
 
+
+          if (result.hasErrors()) {
+              List<String> errorMessages = result.getFieldErrors()
+                      .stream()
+                      .map(FieldError::getDefaultMessage)
+                      .toList();
+              return ResponseEntity.badRequest().body(errorMessages);
+          }
+          subEmailService.createSubEmail(subEmailDTO);
+          return ResponseEntity.ok("Insert SubEmail Successfully");
+      }catch (Exception e) {
+          return ResponseEntity.badRequest().body(e.getMessage());
+      }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteSubEmail(@PathVariable int id) {
+        subEmailService.deleteSubemail(id);
+        return ResponseEntity.ok("Delete SubEmail with id: "+id+" successfully");
+    }
 }

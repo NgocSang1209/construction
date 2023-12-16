@@ -29,7 +29,6 @@ public class JobOpeningService {
                 .end_day(jobOpenningDTO.getEnd_day())
                 .hiring_needs(jobOpenningDTO.getHiring_needs())
                 .vacancies(jobOpenningDTO.getVacancies())
-                .is_active(jobOpenningDTO.getIs_active())
                 .build();
         return jopOpeningRepository.save(newJob);
     }

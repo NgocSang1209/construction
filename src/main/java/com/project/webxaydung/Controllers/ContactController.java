@@ -47,7 +47,7 @@ private  final ContactService contactService;
             @PathVariable("id") int id
     ) {
         contactService.getContactById(id);
-        return ResponseEntity.ok("Product with ID: " + contactService.getContactById(id));
+        return ResponseEntity.ok(contactService.getContactById(id));
     }
 
     @GetMapping("/byDate")

@@ -18,7 +18,7 @@ public class EmployeeService {
                 .builder()
                 .name(employeeDTO.getName())
                 .position(employeeDTO.getPosition())
-                .name(employeeDTO.getName())
+                .email(employeeDTO.getEmail())
                 .phone(employeeDTO.getPhone())
                 .build();
         return employeeRepository.save(newEmployee);

@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                     requests
                             .requestMatchers("**"
 //                                    String.format("%s/users/register", apiPrefix),
-//                                    String.format("%s/users/login", apiPrefix)"
+//                                    String.format("%s/users/login", apiPrefix)
                             )
                             .permitAll();
 
@@ -136,7 +136,7 @@ public class WebSecurityConfig {
 //                            .requestMatchers(DELETE,
 //                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 //                            .anyRequest().authenticated();
-//
+
               })
 
         ;

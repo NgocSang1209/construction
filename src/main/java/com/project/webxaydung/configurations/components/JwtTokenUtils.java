@@ -1,4 +1,4 @@
-package com.project.webxaydung.components;
+package com.project.webxaydung.configurations.components;
 
 import com.project.webxaydung.exception.InvalidParamException;
 import io.jsonwebtoken.Claims;

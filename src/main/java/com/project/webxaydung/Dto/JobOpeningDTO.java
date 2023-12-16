@@ -21,5 +21,4 @@ public class JobOpeningDTO {
     private Date end_day;
     private Integer hiring_needs;
     private Integer vacancies;
-    private int is_active ;
 }

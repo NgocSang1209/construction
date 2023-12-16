@@ -100,4 +100,9 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) throws Exception {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("Delete category with id: "+id+" successfully");
+    }
 }

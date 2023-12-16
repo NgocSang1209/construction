@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDTO {
+public class    EmployeeDTO {
     @NotEmpty(message = "Contact's name cannot be empty")
     private String name;
     private String position;

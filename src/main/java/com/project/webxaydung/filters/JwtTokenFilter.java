@@ -1,7 +1,7 @@
 package com.project.webxaydung.filters;
 
 import com.project.webxaydung.Models.User;
-import com.project.webxaydung.components.JwtTokenUtils;
+import com.project.webxaydung.configurations.components.JwtTokenUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -67,14 +67,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
     private boolean isBypassToken(@NonNull  HttpServletRequest request) {
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
-                Pair.of(String.format("%s/cadidate", apiPrefix), "POST"),
-                Pair.of(String.format("%s/categories", apiPrefix), "GET"),
+                Pair.of(String.format("%s/sub_email", apiPrefix), "POST"),
+                Pair.of(String.format("%s/candidate", apiPrefix), "POST"),
+                Pair.of(String.format("%s/category", apiPrefix), "GET"),
                 Pair.of(String.format("%s/contact", apiPrefix), "POST"),
-                Pair.of(String.format("%s/jobopening", apiPrefix), "GET"),
+                Pair.of(String.format("%s/job_opening", apiPrefix), "GET"),
                 Pair.of(String.format("%s/new", apiPrefix), "GET"),
+                Pair.of(String.format("%s/new/upload", apiPrefix), "GET"),
+                Pair.of(String.format("%s/role", apiPrefix), "GET"),
                 Pair.of(String.format("%s/subemail", apiPrefix), "POST"),
-                Pair.of(String.format("%s/users/register", apiPrefix), "POST"),
-                Pair.of(String.format("%s/users/login", apiPrefix), "POST")
+                Pair.of(String.format("%s/user/register", apiPrefix), "POST"),
+                Pair.of(String.format("%s/user/login", apiPrefix), "POST")
         );
 
         for(Pair<String, String> bypassToken: bypassTokens) {

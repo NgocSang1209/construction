@@ -26,8 +26,8 @@ public class Candidate {
     private  String phone;
     @Column(name = "address",length = 100)
     private  String address;
-    @Column(name = "cv_file",length = 255)
-    private  String cv_file;
+    @Column(name = "cv_file")
+    private  byte[] cv_file;
     @ManyToOne
     @JoinColumn(name = "job_opening_id")
     private JobOpening jobOpening;

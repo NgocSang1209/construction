@@ -1,7 +1,9 @@
 package com.project.webxaydung.Controllers;
+import com.project.webxaydung.Dto.CategoryDTO;
 import com.project.webxaydung.Dto.JobOpeningDTO;
 import com.project.webxaydung.Models.JobOpening;
 import com.project.webxaydung.Services.JobOpeningService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("${api.prefix}/jobopening")
+@RequestMapping("${api.prefix}/job_opening")
 @RequiredArgsConstructor
 @Validated
 public class JobOpeningController {
@@ -41,12 +43,22 @@ public class JobOpeningController {
             @PathVariable("id") int id
     ) {
         jobOpeningService.getJobById(id);
-        return ResponseEntity.ok("Job with ID: " +id+ jobOpeningService.getJobById(id));
+        return ResponseEntity.ok(jobOpeningService.getJobById(id));
     }
     @GetMapping("/available")
     public List<JobOpening> getAvailableJobOpenings() {
         return jobOpeningService.getJobAvailable();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateJob(
+            @PathVariable int id,
+            @Valid @RequestBody JobOpeningDTO jobOpeningDTO
+    ) {
+        jobOpeningService.updateJobOpening(id, jobOpeningDTO);
+        return ResponseEntity.ok("Update category successfully");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletedJob(@PathVariable("id") int id){
         jobOpeningService.deletedjob(id);

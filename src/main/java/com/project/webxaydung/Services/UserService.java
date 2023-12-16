@@ -8,7 +8,7 @@ import com.project.webxaydung.Models.User;
 import com.project.webxaydung.Repositories.EmployeeRepository;
 import com.project.webxaydung.Repositories.RoleRepository;
 import com.project.webxaydung.Repositories.UserRepository;
-import com.project.webxaydung.components.JwtTokenUtils;
+import com.project.webxaydung.configurations.components.JwtTokenUtils;
 import com.project.webxaydung.exception.DataNotFoundException;
 import com.project.webxaydung.exception.PermissionDenyException;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +53,9 @@ public class UserService {
                .active(true)
                .build();
         newUser.setRole(role);
-        newUser.setEmployee(employee);
+       String password = userDTO.getPassword();
+       String encodedPassword = passwordEncoder.encode(password);
+       newUser.setPassword(encodedPassword);
        return userRepository.save(newUser);
    }
     public String login(String account, String password, Long roleId) throws Exception {
@@ -128,5 +130,12 @@ public class UserService {
         } else {
             throw new Exception("User not found");
         }
+    }
+    @Transactional
+    public void deleteUser(int id) throws Exception {
+
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        existingUser.setActive(false);
     }
 }

@@ -1,4 +1,5 @@
 package com.project.webxaydung.Controllers;
+import com.project.webxaydung.Models.Candidate;
 import com.project.webxaydung.Models.New;
 import com.project.webxaydung.Dto.NewDTO;
 import com.project.webxaydung.Responses.NewListResponse;
@@ -19,7 +20,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,7 +27,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
 
 @RestController
 @RequestMapping("${api.prefix}/new")
@@ -183,7 +182,7 @@ public class NewController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteNew(@PathVariable int id) {
+    public ResponseEntity<String> deletesNew(@PathVariable int id) {
         try {
             newService.deleteNew(id);
             return ResponseEntity.ok(String.format("New with id = %d deleted successfully", id));
