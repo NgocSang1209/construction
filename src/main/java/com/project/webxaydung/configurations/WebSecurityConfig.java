@@ -18,126 +18,123 @@ import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpMethod.DELETE;
 
 @Configuration
-//@EnableMethodSecurity
 @EnableWebSecurity
-@EnableWebMvc
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     private final JwtTokenFilter jwtTokenFilter;
     @Value("${api.prefix}")
     private String apiPrefix;
     @Bean
-    //Pair.of(String.format("%s/products", apiPrefix), "GET"),
     public SecurityFilterChain securityFilterChain(HttpSecurity http)  throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> {
                     requests
-                            .requestMatchers("**"
-//                                    String.format("%s/users/register", apiPrefix),
-//                                    String.format("%s/users/login", apiPrefix)
+                            .requestMatchers(
+                                    String.format("%s/users/register", apiPrefix),
+                                    String.format("%s/users/login", apiPrefix)
                             )
-                            .permitAll();
+                            .permitAll()
 
-//                            .requestMatchers(GET,
-//                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole(Role.ADMIN)
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole( Role.ADMIN)
-//
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.ADMIN,Role.USER)
-//
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/employee/**", apiPrefix)).hasRole( Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
-//
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/user/**", apiPrefix)).hasAnyRole(Role.ADMIN,Role.USER)
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/user/**", apiPrefix)).hasRole( Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/user/**", apiPrefix)).hasRole(Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/user/**", apiPrefix)).hasRole(Role.ADMIN)
-//
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(POST,
-//                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(GET,
-//                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-////                            .requestMatchers(POST,
-////                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(PUT,
-//                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//
-//                            .requestMatchers(DELETE,
-//                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-//                            .anyRequest().authenticated();
+                            .requestMatchers(GET,
+                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole(Role.ADMIN)
 
-              })
+                            .requestMatchers(POST,
+                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/candidate/**", apiPrefix)).hasAnyRole( Role.ADMIN)
+
+
+                            .requestMatchers(GET,
+                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(POST,
+                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+
+                            .requestMatchers(POST,
+                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(GET,
+                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.ADMIN,Role.USER)
+
+
+                            .requestMatchers(POST,
+                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
+
+                            .requestMatchers(GET,
+                                    String.format("%s/employee/**", apiPrefix)).hasRole( Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/employee/**", apiPrefix)).hasRole(Role.ADMIN)
+
+
+                            .requestMatchers(POST,
+                                    String.format("%s/user/**", apiPrefix)).hasAnyRole(Role.ADMIN,Role.USER)
+
+                            .requestMatchers(GET,
+                                    String.format("%s/user/**", apiPrefix)).hasRole( Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/user/**", apiPrefix)).hasRole(Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/user/**", apiPrefix)).hasRole(Role.ADMIN)
+
+
+                            .requestMatchers(GET,
+                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(POST,
+                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+
+                            .requestMatchers(GET,
+                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(POST,
+                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(GET,
+                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+//                            .requestMatchers(POST,
+//                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(PUT,
+                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+
+                            .requestMatchers(DELETE,
+                                    String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+                            .anyRequest().authenticated();
+
+                })
 
         ;
         return http.build();
