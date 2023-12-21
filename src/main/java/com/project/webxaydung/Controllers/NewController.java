@@ -91,6 +91,35 @@ public class NewController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PostMapping(value = "uploads", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadImageContent(
+            @RequestParam("file") MultipartFile file
+    ) {
+        try {
+
+            // Kiểm tra xem 'file' có giá trị là null không.
+            if (file == null || file.isEmpty()) {
+                return new ResponseEntity<>("No file uploaded", HttpStatus.BAD_REQUEST);
+            }
+
+            // Kiểm tra kích thước file và định dạng
+            if (file.getSize() > 10 * 1024 * 1024) { // Kích thước > 10MB
+                return new ResponseEntity<>("file load to large", HttpStatus.BAD_REQUEST);
+            }
+
+            String contentType = file.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                return new ResponseEntity<>("Upload image file must be image ", HttpStatus.BAD_REQUEST);
+            }
+
+            // Lưu file và cập nhật thumbnail trong DTO
+            String filename = storeFile(file); // Thay thế hàm này với code của bạn để lưu file
+
+            return ResponseEntity.ok().body(filename);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @GetMapping("/images/{imageName}")
     public ResponseEntity<?> viewImage(@PathVariable String imageName) {
@@ -145,11 +174,9 @@ public class NewController {
         // Tạo Pageable từ thông tin trang và giới hạn
         PageRequest pageRequest = PageRequest.of(
                 page, limit,
-                //Sort.by("createdAt").descending()
                 Sort.by("id").ascending()
         );
         Page<NewResponses> newPage = newService.getAllNews(keyword, categoryId, pageRequest);
-        // Lấy tổng số trang
         int totalPages = newPage.getTotalPages();
         List<NewResponses> news = newPage.getContent();
         return ResponseEntity.ok(NewListResponse

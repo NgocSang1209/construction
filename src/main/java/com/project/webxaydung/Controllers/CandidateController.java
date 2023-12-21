@@ -3,7 +3,6 @@ package com.project.webxaydung.Controllers;
 import com.project.webxaydung.Dto.CandidateDTO;
 import com.project.webxaydung.Models.Candidate;
 import com.project.webxaydung.Repositories.CandidateRepository;
-import com.project.webxaydung.Repositories.CategoryRepository;
 import com.project.webxaydung.Services.CandidateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
