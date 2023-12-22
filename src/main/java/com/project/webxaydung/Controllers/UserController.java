@@ -59,6 +59,7 @@ public class UserController {
             return ResponseEntity.ok(LoginResponse.builder()
                     .message("Login is successfully!")
                     .token(token)
+                    .role_id(userLoginDTO.getRole_id())
                     .build());
         } catch (Exception e) {
            return ResponseEntity.badRequest().body(
