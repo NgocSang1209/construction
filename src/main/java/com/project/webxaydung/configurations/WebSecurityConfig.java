@@ -53,10 +53,6 @@ public class WebSecurityConfig {
                             .requestMatchers(DELETE,
                                     String.format("%s/category/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 
-
-                            .requestMatchers(POST,
-                                    String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-
                             .requestMatchers(GET,
                                     String.format("%s/contact/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 
