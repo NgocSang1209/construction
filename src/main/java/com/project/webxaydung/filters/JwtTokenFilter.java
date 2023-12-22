@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.internal.asm.commons.Method;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -75,7 +76,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 Pair.of(String.format("%s/new", apiPrefix), "GET"),
                 Pair.of(String.format("%s/new/upload", apiPrefix), "GET"),
                 Pair.of(String.format("%s/role", apiPrefix), "GET"),
-                Pair.of(String.format("%s/subemail", apiPrefix), "POST"),
+                Pair.of(String.format("%s/sub_email", apiPrefix), "POST"),
                 Pair.of(String.format("%s/user/register", apiPrefix), "POST"),
                 Pair.of(String.format("%s/user/login", apiPrefix), "POST")
         );

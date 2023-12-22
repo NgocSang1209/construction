@@ -32,8 +32,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests -> {
                     requests
                             .requestMatchers(
-                                    String.format("%s/users/register", apiPrefix),
-                                    String.format("%s/users/login", apiPrefix)
+                                    String.format("%s/user/register", apiPrefix),
+                                    String.format("%s/user/login", apiPrefix)
                             )
                             .permitAll()
 
@@ -95,7 +95,7 @@ public class WebSecurityConfig {
                             .requestMatchers(DELETE,
                                     String.format("%s/user/**", apiPrefix)).hasRole(Role.ADMIN)
 
-
+//                            .requestMatchers(String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
                             .requestMatchers(GET,
                                     String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 
@@ -109,8 +109,8 @@ public class WebSecurityConfig {
                                     String.format("%s/jobopening/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 
 
-                            .requestMatchers(GET,
-                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+//                            .requestMatchers(GET,
+//                                    String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
 
                             .requestMatchers(POST,
                                     String.format("%s/new/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
@@ -132,7 +132,8 @@ public class WebSecurityConfig {
 
                             .requestMatchers(DELETE,
                                     String.format("%s/subemail/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
-                            .anyRequest().authenticated();
+//                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
 
                 })
 
