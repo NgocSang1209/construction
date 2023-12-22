@@ -20,5 +20,4 @@ public class JobOpeningDTO {
     private Date start_day;
     private Date end_day;
     private Integer hiring_needs;
-    private Integer vacancies;
 }

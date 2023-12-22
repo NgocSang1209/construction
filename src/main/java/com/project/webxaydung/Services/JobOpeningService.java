@@ -28,7 +28,6 @@ public class JobOpeningService {
                 .start_day(jobOpenningDTO.getStart_day())
                 .end_day(jobOpenningDTO.getEnd_day())
                 .hiring_needs(jobOpenningDTO.getHiring_needs())
-                .vacancies(jobOpenningDTO.getVacancies())
                 .build();
         return jopOpeningRepository.save(newJob);
     }
@@ -39,24 +38,7 @@ public class JobOpeningService {
         return jopOpeningRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Job not found"));
     }
-    public List<JobOpening> getJobAvailable() {
-        LocalDate currentDate = LocalDate.now();
-        List<JobOpening> allJobOpenings = jopOpeningRepository.findAll();
 
-        for (JobOpening jobOpening : allJobOpenings) {
-            if (jobOpening.getIs_active() == 0) {
-                continue;
-            } else {
-                LocalDate endDay = jobOpening.getEnd_day().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (endDay.isBefore(currentDate) || jobOpening.getVacancies() == 0) {
-                    jobOpening.setIs_active(0);
-                    jopOpeningRepository.save(jobOpening); // Lưu cập nhật vào cơ sở dữ liệu
-                }
-            }
-        }
-
-        return jopOpeningRepository.findAvailableJobOpenings( new Date());
-    }
     public JobOpening updateJobOpening(int id, JobOpeningDTO jobOpenningDTO) {
         // Kiểm tra xem ID có hợp lệ hay không
         if (!jopOpeningRepository.existsById(id)) {
@@ -84,9 +66,6 @@ public class JobOpeningService {
         }
         if (jobOpenningDTO.getHiring_needs() != null) {
             existingJob.setHiring_needs(jobOpenningDTO.getHiring_needs());
-        }
-        if (jobOpenningDTO.getVacancies() != null) {
-            existingJob.setVacancies(jobOpenningDTO.getVacancies());
         }
         return jopOpeningRepository.save(existingJob);
     }

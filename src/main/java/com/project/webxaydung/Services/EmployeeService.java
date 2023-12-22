@@ -40,7 +40,7 @@ public class EmployeeService {
         if (!employeeRepository.existsById(employeeId)) {
             throw new RuntimeException("Không tìm thấy nhân viên với ID: " + employeeId);
         }
-        // Lấy công việc từ cơ sở dữ liệu
+
        Employee existingEmployee = employeeRepository.getOne(employeeId);
         if(employeeDTO.getName()!= null) {
             existingEmployee.setName(employeeDTO.getName());

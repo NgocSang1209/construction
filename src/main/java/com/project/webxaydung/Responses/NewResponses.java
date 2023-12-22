@@ -24,6 +24,7 @@ public class NewResponses {
         NewResponses newResponse = NewResponses.builder()
                 .id(news.getId())
                 .title(news.getTitle())
+                .category_id(news.getCategory().getId())
                 .short_description(news.getShort_description())
                 .thumbnail(news.getThumbnail())
                 .content(news.getContent())

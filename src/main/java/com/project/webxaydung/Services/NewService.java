@@ -3,16 +3,20 @@ package com.project.webxaydung.Services;
 import com.project.webxaydung.Dto.NewDTO;
 import com.project.webxaydung.Models.Category;
 import com.project.webxaydung.Models.New;
+import com.project.webxaydung.Models.User;
 import com.project.webxaydung.Repositories.CategoryRepository;
 import com.project.webxaydung.Repositories.NewRepository;
+import com.project.webxaydung.Responses.NewListResponse;
 import com.project.webxaydung.Responses.NewResponses;
 import com.project.webxaydung.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +47,15 @@ public class NewService  {
         }
         throw new DataNotFoundException("Cannot find New with id =" + newId);
     }
+//    public NewListResponse getNewByCode(String categoryCode) throws DataNotFoundException {
+//        User existingCategory = categoryRepository.findByCode(categoryCode)
+//                .orElseThrow(() -> new DataNotFoundException("category not found"));
+//        Optional<> optionalNew = newRepository.getDetailNewById(newId);
+//        if(optionalNew.isPresent()) {
+//            return optionalNew.get();
+//        }
+//        throw new DataNotFoundException("Cannot find New with id =" + newId);
+//    }
 
     public Page<NewResponses> getAllNews(String keyword,
                                          Long categoryId, PageRequest pageRequest) {

@@ -29,9 +29,5 @@ public class JobOpening {
     private Date end_day;
     @Column(name = "hiring_needs")
     private int hiring_needs;
-    @Column(name = "vacancies")
-    private int vacancies;
-    @Column(name="is_active")
-    private int is_active ;
 
 }

@@ -45,10 +45,6 @@ public class JobOpeningController {
         jobOpeningService.getJobById(id);
         return ResponseEntity.ok(jobOpeningService.getJobById(id));
     }
-    @GetMapping("/available")
-    public List<JobOpening> getAvailableJobOpenings() {
-        return jobOpeningService.getJobAvailable();
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateJob(

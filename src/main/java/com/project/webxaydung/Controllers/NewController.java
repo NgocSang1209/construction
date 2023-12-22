@@ -2,6 +2,7 @@ package com.project.webxaydung.Controllers;
 import com.project.webxaydung.Models.Candidate;
 import com.project.webxaydung.Models.New;
 import com.project.webxaydung.Dto.NewDTO;
+import com.project.webxaydung.Repositories.CategoryRepository;
 import com.project.webxaydung.Responses.NewListResponse;
 import com.project.webxaydung.Responses.NewResponses;
 import com.project.webxaydung.Services.NewService;
@@ -34,6 +35,7 @@ import java.util.UUID;
 @Validated
 public class NewController {
     private  final NewService newService;
+    private final CategoryRepository categoryRepository;
 
     @PostMapping("")
     //POST http://localhost:8088/v1/api/new
@@ -197,6 +199,19 @@ public class NewController {
         }
 
     }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> getNewByCategoryCode(
+//            @PathVariable("code") String newCODE
+//    ) {
+//        try {
+//            New existingNew = newService.getNewByCode(newCODE);
+//            return ResponseEntity.ok(NewResponses.fromNew(existingNew));
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//
+//    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateNew(
             @PathVariable int id,
