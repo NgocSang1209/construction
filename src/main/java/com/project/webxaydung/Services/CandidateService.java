@@ -30,7 +30,7 @@ public class CandidateService {
         if (!isValidPhoneNumber(candidateDTO.getPhone())) {
             throw new DataIntegrityViolationException("Số điện thoại không hợp lệ.");
         }
-        byte[] cvFileBytes= Base64.getDecoder().decode(candidateDTO.getCv_file());
+        //byte[] cvFileBytes= Base64.getDecoder().decode(candidateDTO.getCv_file());
 
         Candidate newCandidate= Candidate
                 .builder()
@@ -38,7 +38,7 @@ public class CandidateService {
                 .address(candidateDTO.getAddress())
                 .phone(candidateDTO.getPhone())
                 .email(candidateDTO.getEmail())
-                .cv_file(cvFileBytes)
+                .cv_file(candidateDTO.getCv_file())
                 .jobOpening(existingJob)
                 .build();
         return candidateRepository.save(newCandidate);
@@ -53,12 +53,12 @@ public class CandidateService {
     public List<Candidate> getCandidatesByJobOpeningId(Integer jobOpeningId) {
         return candidateRepository.findByJobOpeningId(jobOpeningId);
     }
-    public byte[] getCvFile(int candidateId) throws DataNotFoundException {
-        Candidate candidate = candidateRepository.findById(candidateId)
-                .orElseThrow(() -> new DataNotFoundException("Candidate not found"));
-
-        return candidate.getCv_file();
-    }
+//    public byte[] getCvFile(int candidateId) throws DataNotFoundException {
+//        Candidate candidate = candidateRepository.findById(candidateId)
+//                .orElseThrow(() -> new DataNotFoundException("Candidate not found"));
+//
+//        return candidate.getCv_file();
+//    }
 
     public void deleteCandidate(int  id) {
         candidateRepository.deleteById(id);

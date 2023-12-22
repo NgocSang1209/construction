@@ -29,7 +29,10 @@ public class CandidateController {
     private  final CandidateRepository candidateRepository;
 
     @PostMapping("")
-    public ResponseEntity<?> createCadidate(@Valid @RequestBody CandidateDTO candidateDTO, BindingResult result){
+    public ResponseEntity<?> createCandidate(
+                                             @Valid @RequestBody CandidateDTO candidateDTO,
+                                             BindingResult result){
+
         if(result.hasErrors()) {
             List<String> errorMessages = result.getFieldErrors()
                     .stream()
@@ -37,8 +40,8 @@ public class CandidateController {
                     .toList();
             return ResponseEntity.badRequest().body(errorMessages);
         }
-
         try{
+
             candidateService.insertCandidate(candidateDTO);
             return ResponseEntity.ok("Insert candidate Successfully");
         }
@@ -83,7 +86,10 @@ public class CandidateController {
     @GetMapping("/{candidateId}/cv")
     public ResponseEntity<byte[]> getCvFile(@PathVariable int candidateId) {
         try {
-            byte[] cvFileBytes = candidateService.getCvFile(candidateId);
+            Candidate exitingCandidate= candidateService.getCandidateById(candidateId);
+
+            byte[] cvFileBytes= Base64.getDecoder().decode(exitingCandidate.getCv_file());
+//            byte[] cvFileBytes = candidateService.getCvFile(candidateId);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF); // Set the appropriate content type for PDF
