@@ -30,9 +30,9 @@ public class New {
     @Column(name = "thumbnail")
     private String thumbnail;
     @Column(name = "date_published")
-    private LocalDateTime date_published;
+    private LocalDateTime datePublished;
     @PrePersist
     protected void oncreate(){
-        date_published=LocalDateTime.now();
+        datePublished=LocalDateTime.now();
     }
 }

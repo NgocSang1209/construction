@@ -4,6 +4,7 @@ import com.project.webxaydung.Models.New;
 import com.project.webxaydung.Dto.NewDTO;
 import com.project.webxaydung.Repositories.CategoryRepository;
 import com.project.webxaydung.Responses.NewListResponse;
+import com.project.webxaydung.Responses.NewRecentResponses;
 import com.project.webxaydung.Responses.NewResponses;
 import com.project.webxaydung.Services.NewService;
 import jakarta.validation.Valid;
@@ -199,19 +200,13 @@ public class NewController {
         }
 
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> getNewByCategoryCode(
-//            @PathVariable("code") String newCODE
-//    ) {
-//        try {
-//            New existingNew = newService.getNewByCode(newCODE);
-//            return ResponseEntity.ok(NewResponses.fromNew(existingNew));
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//
-//    }
-
+    @GetMapping("/recent")
+    public ResponseEntity<?> getRecentNews() {
+        List<NewRecentResponses> newRecentResponses=newService.getRecentNews()
+                .stream()
+                .map(NewRecentResponses::fromNew).toList();
+        return ResponseEntity.ok(newRecentResponses);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<?> updateNew(
             @PathVariable int id,

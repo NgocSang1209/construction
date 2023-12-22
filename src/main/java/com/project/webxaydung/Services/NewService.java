@@ -6,7 +6,9 @@ import com.project.webxaydung.Models.New;
 import com.project.webxaydung.Models.User;
 import com.project.webxaydung.Repositories.CategoryRepository;
 import com.project.webxaydung.Repositories.NewRepository;
+import com.project.webxaydung.Responses.NewListRecentResponses;
 import com.project.webxaydung.Responses.NewListResponse;
+import com.project.webxaydung.Responses.NewRecentResponses;
 import com.project.webxaydung.Responses.NewResponses;
 import com.project.webxaydung.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -47,16 +49,9 @@ public class NewService  {
         }
         throw new DataNotFoundException("Cannot find New with id =" + newId);
     }
-//    public NewListResponse getNewByCode(String categoryCode) throws DataNotFoundException {
-//        User existingCategory = categoryRepository.findByCode(categoryCode)
-//                .orElseThrow(() -> new DataNotFoundException("category not found"));
-//        Optional<> optionalNew = newRepository.getDetailNewById(newId);
-//        if(optionalNew.isPresent()) {
-//            return optionalNew.get();
-//        }
-//        throw new DataNotFoundException("Cannot find New with id =" + newId);
-//    }
-
+    public List<New> getRecentNews() {
+        return newRepository.findTop5ByOrderByDatePublishedDesc();
+    }
     public Page<NewResponses> getAllNews(String keyword,
                                          Long categoryId, PageRequest pageRequest) {
         // Lấy danh sách New theo trang (page), giới hạn (limit), và categoryId (nếu có)

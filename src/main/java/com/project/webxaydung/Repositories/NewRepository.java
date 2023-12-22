@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface NewRepository extends JpaRepository<New,Integer> {
@@ -18,4 +19,6 @@ public interface NewRepository extends JpaRepository<New,Integer> {
             @Param("categoryId") Long categoryId,
             @Param("keyword") String keyword, Pageable pageable);
     Optional<New> getDetailNewById(int newId);
+
+    List<New> findTop5ByOrderByDatePublishedDesc();
 }
