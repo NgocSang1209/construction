@@ -47,7 +47,7 @@ public class CandidateController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("/upload/")
+    @PostMapping("/upload")
     public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file){
         if (file != null) {
             try {
