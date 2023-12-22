@@ -21,7 +21,7 @@ public class JobOpening {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "requirements")
+    @Column(name = "requirement")
     private String requirement;
     @Column(name = "start_day")
     private Date start_day;

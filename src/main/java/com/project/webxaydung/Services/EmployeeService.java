@@ -41,7 +41,7 @@ public class EmployeeService {
             throw new RuntimeException("Không tìm thấy nhân viên với ID: " + employeeId);
         }
 
-       Employee existingEmployee = employeeRepository.getOne(employeeId);
+       Employee existingEmployee = getEmployeeById(employeeId);
         if(employeeDTO.getName()!= null) {
             existingEmployee.setName(employeeDTO.getName());
         }

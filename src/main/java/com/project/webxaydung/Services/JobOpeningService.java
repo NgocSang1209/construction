@@ -1,6 +1,7 @@
 package com.project.webxaydung.Services;
 
 import com.project.webxaydung.Dto.JobOpeningDTO;
+import com.project.webxaydung.Models.Category;
 import com.project.webxaydung.Models.JobOpening;
 import com.project.webxaydung.Repositories.JopOpeningRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,13 +41,14 @@ public class JobOpeningService {
     }
 
     public JobOpening updateJobOpening(int id, JobOpeningDTO jobOpenningDTO) {
+
         // Kiểm tra xem ID có hợp lệ hay không
         if (!jopOpeningRepository.existsById(id)) {
             throw new RuntimeException("Không tìm thấy công việc với ID: " + id);
         }
 
         // Lấy công việc từ cơ sở dữ liệu
-        JobOpening existingJob = jopOpeningRepository.getOne(id);
+        JobOpening existingJob = getJobById(id);
 
         // Kiểm tra và cập nhật các trường không null từ DTO
         if (jobOpenningDTO.getTitle() != null) {
