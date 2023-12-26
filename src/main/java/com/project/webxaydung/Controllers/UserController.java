@@ -3,6 +3,7 @@ package com.project.webxaydung.Controllers;
 import com.project.webxaydung.Dto.UpdateUserDTO;
 import com.project.webxaydung.Dto.UserDTO;
 import com.project.webxaydung.Dto.UserLoginDTO;
+import com.project.webxaydung.Models.SubEmail;
 import com.project.webxaydung.Models.User;
 import com.project.webxaydung.Responses.LoginResponse;
 import com.project.webxaydung.Services.UserService;
@@ -69,7 +70,12 @@ public class UserController {
             );
         }
     }
+    @GetMapping("")// http://localhost:8080/api/v1/subemail
+    public ResponseEntity<List<User>> getAllUser(){
 
+        List<User> users=userService.getAllUser();
+        return  ResponseEntity.ok(users);
+    }
     @GetMapping("/details")
     public ResponseEntity<?> getUserDetails(
             @RequestHeader("Authorization") String authorizationHeader
@@ -92,9 +98,9 @@ public class UserController {
             String extractedToken = authorizationHeader.substring(7);
             User user = userService.getUserDetailsFromToken(extractedToken);
             // Ensure that the user making the request matches the user being updated
-            if (user.getId() != userId) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
+//            if (user.getId() != userId) {
+//                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//            }
             User updatedUser = userService.updateUser(userId, updatedUserDTO);
             return ResponseEntity.ok(updatedUser);
         } catch (Exception e) {

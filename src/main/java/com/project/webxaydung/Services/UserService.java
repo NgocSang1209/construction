@@ -4,6 +4,7 @@ import com.project.webxaydung.Dto.UpdateUserDTO;
 import com.project.webxaydung.Dto.UserDTO;
 import com.project.webxaydung.Models.Employee;
 import com.project.webxaydung.Models.Role;
+import com.project.webxaydung.Models.SubEmail;
 import com.project.webxaydung.Models.User;
 import com.project.webxaydung.Repositories.EmployeeRepository;
 import com.project.webxaydung.Repositories.RoleRepository;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -118,6 +120,9 @@ public class UserService {
         return userRepository.save(existingUser);
     }
 
+    public List<User> getAllUser(){
+        return userRepository.findAll();
+    }
     public User getUserDetailsFromToken(String token) throws Exception {
         if(jwtTokenUtil.isTokenExpired(token)) {
             throw new Exception("Token is expired");

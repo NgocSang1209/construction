@@ -59,7 +59,6 @@ public class CandidateService {
 //
 //        return candidate.getCv_file();
 //    }
-
     public void deleteCandidate(int  id) {
         candidateRepository.deleteById(id);
     }
